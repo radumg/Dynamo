@@ -11,24 +11,24 @@ namespace WpfVisualizationTests
         {
             var backgroundPreviewName = ViewModel.BackgroundPreviewViewModel.PreferenceWatchName;
             Assert.AreEqual(ViewModel.BackgroundPreviewViewModel.Active,
-                ViewModel.Model.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName));
+                DynamoModel.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName));
 
             ViewModel.BackgroundPreviewViewModel.Active = false;
-            Assert.False(ViewModel.Model.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName));
+            Assert.False(DynamoModel.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName));
 
             ViewModel.BackgroundPreviewViewModel.Active = true;
-            Assert.True(ViewModel.Model.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName));
+            Assert.True(DynamoModel.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName));
         }
         [Test]
         public void Watch3DViewModel_Active_InSyncWithPreferencesUsing1_0API()
         {
-            Assert.AreEqual(ViewModel.BackgroundPreviewViewModel.Active, ViewModel.Model.PreferenceSettings.IsBackgroundPreviewActive);
+            Assert.AreEqual(ViewModel.BackgroundPreviewViewModel.Active, DynamoModel.PreferenceSettings.IsBackgroundPreviewActive);
 
             ViewModel.BackgroundPreviewViewModel.Active = false;
-            Assert.False(ViewModel.Model.PreferenceSettings.IsBackgroundPreviewActive);
+            Assert.False(DynamoModel.PreferenceSettings.IsBackgroundPreviewActive);
 
             ViewModel.BackgroundPreviewViewModel.Active = true;
-            Assert.True(ViewModel.Model.PreferenceSettings.IsBackgroundPreviewActive);
+            Assert.True(DynamoModel.PreferenceSettings.IsBackgroundPreviewActive);
         }
     }
 }

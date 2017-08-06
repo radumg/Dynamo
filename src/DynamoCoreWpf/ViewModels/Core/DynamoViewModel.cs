@@ -90,7 +90,7 @@ namespace Dynamo.ViewModels
 
         public PreferenceSettings PreferenceSettings
         {
-            get { return Model.PreferenceSettings; }
+            get { return DynamoModel.PreferenceSettings; }
         }
 
         public Point TransformOrigin
@@ -247,11 +247,11 @@ namespace Dynamo.ViewModels
         {
             get
             {
-                return model.PreferenceSettings.ConsoleHeight;
+                return DynamoModel.PreferenceSettings.ConsoleHeight;
             }
             set
             {
-                model.PreferenceSettings.ConsoleHeight = value;
+                DynamoModel.PreferenceSettings.ConsoleHeight = value;
 
                 RaisePropertyChanged("ConsoleHeight");
             }
@@ -264,11 +264,11 @@ namespace Dynamo.ViewModels
         {
             get
             {
-                return model.PreferenceSettings.ShowPreviewBubbles;
+                return DynamoModel.PreferenceSettings.ShowPreviewBubbles;
             }
             set
             {
-                model.PreferenceSettings.ShowPreviewBubbles = value;
+                DynamoModel.PreferenceSettings.ShowPreviewBubbles = value;
                 RaisePropertyChanged("ShowPreviewBubbles");
             }
         }
@@ -295,11 +295,11 @@ namespace Dynamo.ViewModels
         {
             get
             {
-                return model.PreferenceSettings.LibraryWidth;
+                return DynamoModel.PreferenceSettings.LibraryWidth;
             }
             set
             {
-                model.PreferenceSettings.LibraryWidth = value;
+                DynamoModel.PreferenceSettings.LibraryWidth = value;
                 RaisePropertyChanged("LibraryWidth");
             }
         }
@@ -491,7 +491,7 @@ namespace Dynamo.ViewModels
                 startConfiguration.DynamoModel = DynamoModel.Start();
 
             if(startConfiguration.WatchHandler == null)
-                startConfiguration.WatchHandler = new DefaultWatchHandler(startConfiguration.DynamoModel.PreferenceSettings);
+                startConfiguration.WatchHandler = new DefaultWatchHandler(DynamoModel.PreferenceSettings);
 
             if (startConfiguration.Watch3DViewModel == null)
             {
@@ -553,7 +553,7 @@ namespace Dynamo.ViewModels
 
             SubscribeDispatcherHandlers();
 
-            RenderPackageFactoryViewModel = new RenderPackageFactoryViewModel(Model.PreferenceSettings);
+            RenderPackageFactoryViewModel = new RenderPackageFactoryViewModel(DynamoModel.PreferenceSettings);
             RenderPackageFactoryViewModel.PropertyChanged += RenderPackageFactoryViewModel_PropertyChanged;
 
             BackgroundPreviewViewModel = startConfiguration.Watch3DViewModel;
@@ -583,7 +583,7 @@ namespace Dynamo.ViewModels
             {
                 case "ShowEdges":
                     var factoryVm = (RenderPackageFactoryViewModel)sender;
-                    model.PreferenceSettings.ShowEdges = factoryVm.Factory.TessellationParameters.ShowEdges;
+                    DynamoModel.PreferenceSettings.ShowEdges = factoryVm.Factory.TessellationParameters.ShowEdges;
                     // A full regeneration is required to get the edge geometry.
                     foreach (var vm in Watch3DViewModels)
                     {
@@ -640,10 +640,10 @@ namespace Dynamo.ViewModels
 
         private void InitializeRecentFiles()
         {
-            this.RecentFiles = new ObservableCollection<string>(model.PreferenceSettings.RecentFiles);
+            this.RecentFiles = new ObservableCollection<string>(DynamoModel.PreferenceSettings.RecentFiles);
             this.RecentFiles.CollectionChanged += (sender, args) =>
             {
-                model.PreferenceSettings.RecentFiles = this.RecentFiles.ToList();
+                DynamoModel.PreferenceSettings.RecentFiles = this.RecentFiles.ToList();
             };
         }
 
@@ -1125,7 +1125,7 @@ namespace Dynamo.ViewModels
 
             RecentFiles.Insert(0, path);
 
-            int maxNumRecentFiles = Model.PreferenceSettings.MaxNumRecentFiles;
+            int maxNumRecentFiles = DynamoModel.PreferenceSettings.MaxNumRecentFiles;
             if (RecentFiles.Count > maxNumRecentFiles)
             {
                 RecentFiles.RemoveRange(maxNumRecentFiles, RecentFiles.Count - maxNumRecentFiles);
@@ -2242,7 +2242,7 @@ namespace Dynamo.ViewModels
 
         private void SetNumberFormat(object parameter)
         {
-            model.PreferenceSettings.NumberFormat = parameter.ToString();
+            DynamoModel.PreferenceSettings.NumberFormat = parameter.ToString();
         }
 
         private bool CanSetNumberFormat(object parameter)

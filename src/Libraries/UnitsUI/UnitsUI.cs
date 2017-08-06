@@ -72,7 +72,7 @@ namespace UnitsUI
 
             tb.OnChangeCommitted += () => model.OnNodeModified();
 
-            (nodeView.ViewModel.DynamoViewModel.Model.PreferenceSettings).PropertyChanged += PreferenceSettings_PropertyChanged;
+            (DynamoModel.PreferenceSettings).PropertyChanged += PreferenceSettings_PropertyChanged;
         }
 
         void PreferenceSettings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

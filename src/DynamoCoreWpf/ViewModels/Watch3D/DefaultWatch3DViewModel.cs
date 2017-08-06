@@ -43,7 +43,7 @@ namespace Dynamo.Wpf.ViewModels.Watch3D
             Model = model;
             Scheduler = model.Scheduler;
             Logger = model.Logger;
-            Preferences = model.PreferenceSettings;
+            Preferences = DynamoModel.PreferenceSettings;
             EngineControllerManager = model;
         }
     }

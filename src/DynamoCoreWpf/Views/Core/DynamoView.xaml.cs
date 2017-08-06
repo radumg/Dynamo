@@ -80,7 +80,7 @@ namespace Dynamo.Controls
             // When the view is constructed, we enable or disable hardware acceleration based on that preference. 
             //This preference is not exposed in the UI and can be used to debug hardware issues only
             // by modifying the preferences xml.
-            RenderOptions.ProcessRenderMode = dynamoViewModel.Model.PreferenceSettings.UseHardwareAcceleration ? 
+            RenderOptions.ProcessRenderMode = DynamoModel.PreferenceSettings.UseHardwareAcceleration ? 
                 RenderMode.Default : RenderMode.SoftwareOnly;
             
             this.dynamoViewModel = dynamoViewModel;
@@ -111,10 +111,10 @@ namespace Dynamo.Controls
             // of the available monitors.
             if (CheckVirtualScreenSize())
             {
-                Left = dynamoViewModel.Model.PreferenceSettings.WindowX;
-                Top = dynamoViewModel.Model.PreferenceSettings.WindowY;
-                Width = dynamoViewModel.Model.PreferenceSettings.WindowW;
-                Height = dynamoViewModel.Model.PreferenceSettings.WindowH;
+                Left = DynamoModel.PreferenceSettings.WindowX;
+                Top = DynamoModel.PreferenceSettings.WindowY;
+                Width = DynamoModel.PreferenceSettings.WindowW;
+                Height = DynamoModel.PreferenceSettings.WindowH;
             }
             else
             {
@@ -299,15 +299,15 @@ namespace Dynamo.Controls
             // On Ian's Windows 8 setup, when Dynamo is maximized, the origin
             // saves at -8,-8. There doesn't seem to be any documentation on this
             // so we'll put in a 10 pixel check to still allow the window to maximize.
-            if (dynamoViewModel.Model.PreferenceSettings.WindowX < ox - 10 ||
-                dynamoViewModel.Model.PreferenceSettings.WindowY < oy - 10)
+            if (DynamoModel.PreferenceSettings.WindowX < ox - 10 ||
+                DynamoModel.PreferenceSettings.WindowY < oy - 10)
             {
                 return false;
             }
 
             // Check that the window is smaller than the available area.
-            if (dynamoViewModel.Model.PreferenceSettings.WindowW > w ||
-                dynamoViewModel.Model.PreferenceSettings.WindowH > h)
+            if (DynamoModel.PreferenceSettings.WindowW > w ||
+                DynamoModel.PreferenceSettings.WindowH > h)
             {
                 return false;
             }
@@ -317,14 +317,14 @@ namespace Dynamo.Controls
 
         void DynamoView_LocationChanged(object sender, EventArgs e)
         {
-            dynamoViewModel.Model.PreferenceSettings.WindowX = Left;
-            dynamoViewModel.Model.PreferenceSettings.WindowY = Top;
+            DynamoModel.PreferenceSettings.WindowX = Left;
+            DynamoModel.PreferenceSettings.WindowY = Top;
         }
 
         void DynamoView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            dynamoViewModel.Model.PreferenceSettings.WindowW = e.NewSize.Width;
-            dynamoViewModel.Model.PreferenceSettings.WindowH = e.NewSize.Height;
+            DynamoModel.PreferenceSettings.WindowW = e.NewSize.Width;
+            DynamoModel.PreferenceSettings.WindowH = e.NewSize.Height;
         }
 
         void InitializeLogin()
@@ -481,7 +481,7 @@ namespace Dynamo.Controls
             CursorLibrary.GetCursor(CursorSet.ArcSelect);
 
             //Backing up IsFirstRun to determine whether to show Gallery
-            var isFirstRun = dynamoViewModel.Model.PreferenceSettings.IsFirstRun;
+            var isFirstRun = DynamoModel.PreferenceSettings.IsFirstRun;
             // If first run, Collect Info Prompt will appear
             UsageReportingManager.Instance.CheckIsFirstRun(this, dynamoViewModel.BrandingResourceProvider);
 
@@ -616,7 +616,7 @@ namespace Dynamo.Controls
         /// 
         bool DisplayTermsOfUseForAcceptance()
         {
-            var prefSettings = dynamoViewModel.Model.PreferenceSettings;
+            var prefSettings = DynamoModel.PreferenceSettings;
             if (prefSettings.PackageDownloadTouAccepted)
                 return true; // User accepts the terms of use.
 

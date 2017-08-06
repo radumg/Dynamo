@@ -25,7 +25,7 @@ namespace Dynamo.Tests
             List<string> paths = new List<string>();
 
             // Save the file as different files for (maxNum + 1) times
-            int maxNum = ViewModel.Model.PreferenceSettings.MaxNumRecentFiles;
+            int maxNum = DynamoModel.PreferenceSettings.MaxNumRecentFiles;
             for (int i = 0; i < maxNum + 1; i++)
             {
                 var newPath = GetNewFileNameOnTempPath("dyn");
@@ -35,12 +35,12 @@ namespace Dynamo.Tests
             }
 
             // Ensure the number of recent files reaches the maximum number
-            Assert.AreEqual(maxNum, ViewModel.Model.PreferenceSettings.RecentFiles.Count);
+            Assert.AreEqual(maxNum, DynamoModel.PreferenceSettings.RecentFiles.Count);
 
             // Ensure the recent files are recent
             for (int i = 0; i < maxNum; i++)
             {
-                Assert.AreEqual(0, string.CompareOrdinal(paths.ElementAt(maxNum - i), ViewModel.Model.PreferenceSettings.RecentFiles[i]));
+                Assert.AreEqual(0, string.CompareOrdinal(paths.ElementAt(maxNum - i), DynamoModel.PreferenceSettings.RecentFiles[i]));
             }
 
             // Clear and delete the temporary files
@@ -54,9 +54,9 @@ namespace Dynamo.Tests
         [Test]
         public void SetMaxNumRecentFiles()
         {
-            ViewModel.Model.PreferenceSettings.MaxNumRecentFiles = 0;
+            DynamoModel.PreferenceSettings.MaxNumRecentFiles = 0;
 
-            Assert.AreEqual(PreferenceSettings.DefaultMaxNumRecentFiles, ViewModel.Model.PreferenceSettings.MaxNumRecentFiles);
+            Assert.AreEqual(PreferenceSettings.DefaultMaxNumRecentFiles, DynamoModel.PreferenceSettings.MaxNumRecentFiles);
         }
     }
 }

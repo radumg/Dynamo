@@ -211,7 +211,7 @@ namespace Dynamo.UI.Controls
 
             var dvm = this.DynamoViewModel;
             RefreshRecentFileList(dvm.RecentFiles);
-            RefreshBackupFileList(dvm.Model.PreferenceSettings.BackupFiles);
+            RefreshBackupFileList(DynamoModel.PreferenceSettings.BackupFiles);
             dvm.RecentFiles.CollectionChanged += OnRecentFilesChanged;
         }
         internal void WalkDirectoryTree(System.IO.DirectoryInfo root, SampleFileEntry rootProperty)
@@ -336,7 +336,7 @@ namespace Dynamo.UI.Controls
             get
             {
                 if (StabilityUtils.IsLastShutdownClean 
-                    || DynamoViewModel.Model.PreferenceSettings.BackupFiles.Count == 0)
+                    || DynamoModel.PreferenceSettings.BackupFiles.Count == 0)
                 {
                     return Dynamo.Wpf.Properties.Resources.StartPageBackupNoCrash;
                 }
@@ -534,7 +534,7 @@ namespace Dynamo.UI.Controls
         private void OpenAllFilesOnCrash(object sender, MouseButtonEventArgs e)
         {
             var dvm = dynamoViewModel;
-            foreach (var filePath in dvm.Model.PreferenceSettings.BackupFiles)
+            foreach (var filePath in DynamoModel.PreferenceSettings.BackupFiles)
             {
                 if (dvm.OpenCommand.CanExecute(filePath))
                     dvm.OpenCommand.Execute(filePath);

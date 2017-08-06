@@ -547,7 +547,7 @@ namespace Dynamo.PackageManager
                     return;
                 }
 
-                var settings = PackageManagerClientViewModel.DynamoViewModel.Model.PreferenceSettings;
+                var settings = DynamoModel.PreferenceSettings;
 
                 if (uninstallsRequiringRestart.Any())
                 {

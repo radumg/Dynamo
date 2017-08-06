@@ -140,7 +140,7 @@ namespace Dynamo.Logging
         {
             //Set the preferences, so that we can get live value of analytics 
             //reporting approved status.
-            preferences = dynamoModel.PreferenceSettings;
+            preferences = DynamoModel.PreferenceSettings;
 
             if (Session == null) Session = new DynamoAnalyticsSession();
 

@@ -44,7 +44,7 @@ namespace Dynamo.PackageManager.Tests
             var loader = new PackageLoader(PackagesDirectory);
             loader.LoadAll(new LoadPackageParams
             {
-                Preferences = this.CurrentDynamoModel.PreferenceSettings
+                Preferences = DynamoModel.PreferenceSettings
             });
 
             // There are four packages in "GitHub\Dynamo\test\pkgs"
@@ -58,7 +58,7 @@ namespace Dynamo.PackageManager.Tests
             var loader = new PackageLoader(pkgDir);
             loader.LoadAll(new LoadPackageParams
             {
-                Preferences = this.CurrentDynamoModel.PreferenceSettings           
+                Preferences = DynamoModel.PreferenceSettings           
             });
 
             Assert.AreEqual(0, loader.LocalPackages.Count());
@@ -73,7 +73,7 @@ namespace Dynamo.PackageManager.Tests
 
             loader.LoadAll(new LoadPackageParams
             {
-                Preferences = this.CurrentDynamoModel.PreferenceSettings
+                Preferences = DynamoModel.PreferenceSettings
             });
 
             var pkg = loader.LocalPackages.FirstOrDefault(x => x.Name == "Custom Rounding");

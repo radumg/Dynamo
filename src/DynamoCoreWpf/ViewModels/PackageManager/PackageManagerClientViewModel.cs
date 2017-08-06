@@ -476,7 +476,7 @@ namespace Dynamo.ViewModels
                             var dynModel = DynamoViewModel.Model;
                             try
                             {
-                                firstOrDefault.UninstallCore(dynModel.CustomNodeManager, pmExtension.PackageLoader, dynModel.PreferenceSettings);
+                                firstOrDefault.UninstallCore(dynModel.CustomNodeManager, pmExtension.PackageLoader, DynamoModel.PreferenceSettings);
                             }
                             catch
                             {

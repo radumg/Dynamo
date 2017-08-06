@@ -441,14 +441,14 @@ namespace DynamoCoreWpfTests
         [Category("DynamoUI")]
         public void PreferenceSetting_BackgroundPreview_1_0API()
         {
-            bool expectedValue = !ViewModel.Model.PreferenceSettings.IsBackgroundPreviewActive;
+            bool expectedValue = !DynamoModel.PreferenceSettings.IsBackgroundPreviewActive;
             ViewModel.ToggleFullscreenWatchShowing(null);
-            Assert.AreEqual(expectedValue, ViewModel.Model.PreferenceSettings.IsBackgroundPreviewActive);
+            Assert.AreEqual(expectedValue, DynamoModel.PreferenceSettings.IsBackgroundPreviewActive);
           
 
-            expectedValue = !ViewModel.Model.PreferenceSettings.IsBackgroundPreviewActive;
+            expectedValue = !DynamoModel.PreferenceSettings.IsBackgroundPreviewActive;
             ViewModel.ToggleFullscreenWatchShowing(null);
-            Assert.AreEqual(expectedValue, ViewModel.Model.PreferenceSettings.IsBackgroundPreviewActive);
+            Assert.AreEqual(expectedValue, DynamoModel.PreferenceSettings.IsBackgroundPreviewActive);
 
             #region Save And Load of PreferenceSettings
 
@@ -488,33 +488,33 @@ namespace DynamoCoreWpfTests
             #region BackgroundPreviewActive
 
             var backgroundPreviewName = ViewModel.BackgroundPreviewViewModel.PreferenceWatchName;
-            bool expectedValue = !ViewModel.Model.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName);
+            bool expectedValue = !DynamoModel.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName);
             ViewModel.ToggleFullscreenWatchShowing(null);
-            Assert.AreEqual(expectedValue, ViewModel.Model.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName));
+            Assert.AreEqual(expectedValue, DynamoModel.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName));
 
-            expectedValue = !ViewModel.Model.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName);
+            expectedValue = !DynamoModel.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName);
             ViewModel.ToggleFullscreenWatchShowing(null);
-            Assert.AreEqual(expectedValue, ViewModel.Model.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName));
+            Assert.AreEqual(expectedValue, DynamoModel.PreferenceSettings.GetIsBackgroundPreviewActive(backgroundPreviewName));
             #endregion
 
             #region ConsoleHeight
             int expectedHeight = 100; ;
             ViewModel.ToggleConsoleShowing(null);
-            Assert.AreEqual(expectedHeight, ViewModel.Model.PreferenceSettings.ConsoleHeight);
+            Assert.AreEqual(expectedHeight, DynamoModel.PreferenceSettings.ConsoleHeight);
 
             expectedHeight = 0;
             ViewModel.ToggleConsoleShowing(null);
-            Assert.AreEqual(expectedHeight, ViewModel.Model.PreferenceSettings.ConsoleHeight);
+            Assert.AreEqual(expectedHeight, DynamoModel.PreferenceSettings.ConsoleHeight);
             #endregion
 
             #region ConnectorType
             ConnectorType expectedConnector = ConnectorType.BEZIER;
             ViewModel.SetConnectorType("BEZIER");
-            Assert.AreEqual(expectedConnector, ViewModel.Model.PreferenceSettings.ConnectorType);
+            Assert.AreEqual(expectedConnector, DynamoModel.PreferenceSettings.ConnectorType);
 
             expectedConnector = ConnectorType.POLYLINE;
             ViewModel.SetConnectorType("POLYLINE");
-            Assert.AreEqual(expectedConnector, ViewModel.Model.PreferenceSettings.ConnectorType);
+            Assert.AreEqual(expectedConnector, DynamoModel.PreferenceSettings.ConnectorType);
             #endregion
 
             #region Collect Information Option
@@ -595,10 +595,10 @@ namespace DynamoCoreWpfTests
         public void PreferenceSettings_ShowEdges_Toggle()
         {
             ViewModel.RenderPackageFactoryViewModel.ShowEdges = false;
-            Assert.False(Model.PreferenceSettings.ShowEdges);
+            Assert.False(DynamoModel.PreferenceSettings.ShowEdges);
 
             ViewModel.RenderPackageFactoryViewModel.ShowEdges = true;
-            Assert.True(Model.PreferenceSettings.ShowEdges);
+            Assert.True(DynamoModel.PreferenceSettings.ShowEdges);
         }
 
         [Test]

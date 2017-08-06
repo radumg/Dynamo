@@ -22,7 +22,7 @@ namespace Dynamo.Configuration
             parameters[ParameterKeys.GeometryFactory] = geometryFactoryPath;
             parameters[ParameterKeys.MajorVersion] = pathManager.MajorFileVersion;
             parameters[ParameterKeys.MinorVersion] = pathManager.MinorFileVersion;
-            parameters[ParameterKeys.NumberFormat] = model.PreferenceSettings.NumberFormat;
+            parameters[ParameterKeys.NumberFormat] = DynamoModel.PreferenceSettings.NumberFormat;
         }
 
         /// <summary>

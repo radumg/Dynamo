@@ -104,7 +104,7 @@ namespace CoreNodeModelsWpf.Nodes
         private void Subscribe()
         {
             watch.EvaluationComplete += WatchOnEvaluationComplete;
-            this.dynamoViewModel.Model.PreferenceSettings.PropertyChanged += PreferenceSettingsOnPropertyChanged;
+            DynamoModel.PreferenceSettings.PropertyChanged += PreferenceSettingsOnPropertyChanged;
             rootWatchViewModel.PropertyChanged += RootWatchViewModelOnPropertyChanged;
 
             watch.PortConnected += OnPortConnected;
@@ -114,7 +114,7 @@ namespace CoreNodeModelsWpf.Nodes
         public void Dispose()
         {
             watch.EvaluationComplete -= WatchOnEvaluationComplete;
-            dynamoViewModel.Model.PreferenceSettings.PropertyChanged -= PreferenceSettingsOnPropertyChanged;
+            DynamoModel.PreferenceSettings.PropertyChanged -= PreferenceSettingsOnPropertyChanged;
             rootWatchViewModel.PropertyChanged -= RootWatchViewModelOnPropertyChanged;
 
             watch.PortConnected -= OnPortConnected;

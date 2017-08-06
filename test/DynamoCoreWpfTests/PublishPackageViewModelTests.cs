@@ -83,7 +83,7 @@ namespace DynamoCoreWpfTests
             var loader = new PackageLoader(packagesDirectory);
             loader.LoadAll(new LoadPackageParams
             {
-                Preferences = ViewModel.Model.PreferenceSettings
+                Preferences = DynamoModel.PreferenceSettings
             });
 
             PublishPackageViewModel vm = null;

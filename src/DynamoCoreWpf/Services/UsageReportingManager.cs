@@ -50,18 +50,18 @@ namespace Dynamo.Services
             get {
                 return !DynamoModel.IsTestMode
                     && (dynamoViewModel != null
-                        && dynamoViewModel.Model.PreferenceSettings.IsUsageReportingApproved);
+                        && DynamoModel.PreferenceSettings.IsUsageReportingApproved);
             }
             private set
             {
-                dynamoViewModel.Model.PreferenceSettings.IsUsageReportingApproved = value;
+                DynamoModel.PreferenceSettings.IsUsageReportingApproved = value;
                 RaisePropertyChanged("IsUsageReportingApproved");
                 var path = dynamoViewModel.Model.PathManager.PreferenceFilePath;
 
                 // Call PreferenceSettings to save
                 try
                 {
-                    dynamoViewModel.Model.PreferenceSettings.SaveInternal(path);
+                    DynamoModel.PreferenceSettings.SaveInternal(path);
                 }
                 catch (Exception args)
                 {
@@ -96,21 +96,21 @@ namespace Dynamo.Services
                     return false;
 
                 if (dynamoViewModel.Model != null)
-                    return dynamoViewModel.Model.PreferenceSettings.IsAnalyticsReportingApproved;
+                    return DynamoModel.PreferenceSettings.IsAnalyticsReportingApproved;
 
                 return true;
             }
 
             private set
             {
-                dynamoViewModel.Model.PreferenceSettings.IsAnalyticsReportingApproved = value;
+                DynamoModel.PreferenceSettings.IsAnalyticsReportingApproved = value;
                 RaisePropertyChanged("IsAnalyticsReportingApproved");
                 var path = dynamoViewModel.Model.PathManager.PreferenceFilePath;
 
                 // Call PreferenceSettings to save
                 try
                 {
-                    dynamoViewModel.Model.PreferenceSettings.SaveInternal(path);
+                    DynamoModel.PreferenceSettings.SaveInternal(path);
                 }
                 catch (Exception args)
                 {
@@ -127,11 +127,11 @@ namespace Dynamo.Services
         {
             get
             {
-                return dynamoViewModel.Model.PreferenceSettings.IsFirstRun;
+                return DynamoModel.PreferenceSettings.IsFirstRun;
             }
             private set
             {
-                dynamoViewModel.Model.PreferenceSettings.IsFirstRun = value;
+                DynamoModel.PreferenceSettings.IsFirstRun = value;
                 RaisePropertyChanged("FirstRun");
             }
         }
@@ -150,7 +150,7 @@ namespace Dynamo.Services
         {
             resourceProvider = resource;
             // First run of Dynamo
-            if (dynamoViewModel.Model.PreferenceSettings.IsFirstRun)
+            if (DynamoModel.PreferenceSettings.IsFirstRun)
             {
                 FirstRun = false;
 

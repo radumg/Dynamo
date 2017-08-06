@@ -123,7 +123,7 @@ namespace DynamoCoreWpfTests
 
             Assert.DoesNotThrow(() => ViewModel.HomeSpace.Run());
 
-            ViewModel.Model.PreferenceSettings.NumberFormat = "f0";
+            DynamoModel.PreferenceSettings.NumberFormat = "f0";
 
             // get count node
             var watchNumber = model.CurrentWorkspace.NodeFromWorkspace("eed0b6aa-0d82-44c5-aab6-2bf131044940") as Watch;
@@ -153,7 +153,7 @@ namespace DynamoCoreWpfTests
 
             Assert.DoesNotThrow(() => ViewModel.HomeSpace.Run());
 
-            ViewModel.Model.PreferenceSettings.NumberFormat = "f0";
+            DynamoModel.PreferenceSettings.NumberFormat = "f0";
 
             // get count node
             var watchNumbers = model.CurrentWorkspace.NodeFromWorkspace("f79b65d9-8cda-449c-a8fa-8a44166eec12") as Watch;
