@@ -17,6 +17,7 @@ using Greg.Responses;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
 using Dynamo.Wpf.Properties;
+using Dynamo.Models;
 
 namespace Dynamo.PackageManager
 {

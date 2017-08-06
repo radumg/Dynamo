@@ -1,4 +1,5 @@
-﻿using Dynamo.Tests;
+﻿using Dynamo.Models;
+using Dynamo.Tests;
 using NUnit.Framework;
 
 namespace WpfVisualizationTests

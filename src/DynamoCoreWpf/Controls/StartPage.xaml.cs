@@ -15,6 +15,7 @@ using Microsoft.Practices.Prism.ViewModel;
 using Dynamo.Wpf.Properties;
 using Dynamo.Logging;
 using Dynamo.Configuration;
+using Dynamo.Models;
 
 namespace Dynamo.UI.Controls
 {
