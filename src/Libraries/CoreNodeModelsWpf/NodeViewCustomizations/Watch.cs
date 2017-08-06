@@ -15,6 +15,7 @@ using Dynamo.Scheduler;
 using Dynamo.ViewModels;
 using ProtoCore.AST.AssociativeAST;
 using Dynamo.Wpf;
+using Dynamo.Models;
 
 namespace CoreNodeModelsWpf.Nodes
 {

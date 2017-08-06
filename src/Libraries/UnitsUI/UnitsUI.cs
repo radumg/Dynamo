@@ -23,6 +23,7 @@ using Dynamo.Wpf;
 using DynamoUnits;
 using ProtoCore.AST.AssociativeAST;
 using UnitsUI.Properties;
+using Dynamo.Models;
 
 namespace UnitsUI
 {
