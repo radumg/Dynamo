@@ -26,6 +26,7 @@ namespace Dynamo.ViewModels
     public class PackagePathViewModel : ViewModelBase
     {
         public ObservableCollection<string> RootLocations { get; private set; }
+        public ObservableCollection<string> TemplatesLocations { get; private set; }
         private int selectedIndex;
         public int SelectedIndex
         {
@@ -71,6 +72,8 @@ namespace Dynamo.ViewModels
             this.loadPackageParams = loadParams;
             this.customNodeManager = customNodeManager;
             RootLocations = new ObservableCollection<string>(setting.CustomPackageFolders);
+            TemplatesLocations = new ObservableCollection<string>();
+            TemplatesLocations.Add(setting.PythonTemplateFilePath);
 
             AddPathCommand = new DelegateCommand(p => InsertPath());
             DeletePathCommand = new DelegateCommand(p => RemovePathAt((int) p), CanDelete);
@@ -89,6 +92,9 @@ namespace Dynamo.ViewModels
         {
 
             RootLocations = new ObservableCollection<string>(setting.CustomPackageFolders);
+            TemplatesLocations = new ObservableCollection<string>();
+            TemplatesLocations.Add(setting.PythonTemplateFilePath);
+
 
             AddPathCommand = new DelegateCommand(p => InsertPath());
             DeletePathCommand = new DelegateCommand(p => RemovePathAt((int)p), CanDelete);

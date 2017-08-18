@@ -12,7 +12,7 @@
         Height="450"
         Width="550"
         MinWidth="550"
-        MinHeight="450"
+        MinHeight="550"
         d:DesignHeight="300"
         d:DesignWidth="300"
         Background="#515151"
@@ -126,6 +126,10 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -213,7 +217,43 @@
             </ListBox.ItemsSource>
         </ListBox>
 
-        <StackPanel Grid.Row="3"
+        <TextBlock Grid.Row="3"
+                   Grid.Column="1"
+                   Margin="0,10,0,5"
+                   Text="Python template file path :" />
+        
+        <ListBox x:Name="PythonPath"
+                 Grid.Row="4"
+                 Grid.Column="1"
+                 SelectionMode="Single"
+                 SelectionChanged="OnPathSelectionChanged"
+                 Style="{StaticResource PathListBoxStyle}"
+                 ItemContainerStyle="{StaticResource PathListBoxItemStyle}">
+            <ListBox.ItemsSource>
+                <Binding Path="DataContext.TemplatesLocations"
+                         RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Window}}" />
+            </ListBox.ItemsSource>
+        </ListBox>
+
+        <TextBlock Grid.Row="5"
+                   Grid.Column="1"
+                   Margin="0,10,0,5"
+                   Text="DYN template file path :" />
+
+        <ListBox x:Name="DynPath"
+                 Grid.Row="6"
+                 Grid.Column="1"
+                 SelectionMode="Single"
+                 SelectionChanged="OnPathSelectionChanged"
+                 Style="{StaticResource PathListBoxStyle}"
+                 ItemContainerStyle="{StaticResource PathListBoxItemStyle}">
+            <ListBox.ItemsSource>
+                <Binding Path="DataContext.TemplatesLocations"
+                         RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type Window}}" />
+            </ListBox.ItemsSource>
+        </ListBox>
+
+        <StackPanel Grid.Row="7"
                     Grid.Column="1"
                     Orientation="Horizontal"
                     Margin="0,10,0,0"

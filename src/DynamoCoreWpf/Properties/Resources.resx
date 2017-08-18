@@ -2183,4 +2183,8 @@ Want to publish a different package?</value>
   <data name="RerunButtonToolTip" xml:space="preserve">
     <value>Rerun the graph.</value>
   </data>
+  <data name="PackagePathPythonHeading" xml:space="preserve">
+    <value>Python template file path:</value>
+    <comment>Package path management dialog content</comment>
+  </data>
 </root>

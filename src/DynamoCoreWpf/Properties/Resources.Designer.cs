@@ -3696,6 +3696,15 @@ namespace Dynamo.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Python template file path:.
+        /// </summary>
+        public static string PackagePathPythonHeading {
+            get {
+                return ResourceManager.GetString("PackagePathPythonHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accept Changes.
         /// </summary>
         public static string PackagePathViewAccept {

@@ -877,7 +877,7 @@ It does not contain your graph or any personal data</value>
     <comment>Settings menu | Geometry Scaling</comment>
   </data>
   <data name="DynamoViewSettingsMenuIsolationMode" xml:space="preserve">
-    <value>Isolate Selected Geometries</value>
+    <value>Isolate Selected Geometry</value>
   </data>
   <data name="DynamoViewSettingsMenuShowEdges" xml:space="preserve">
     <value>Show Edges</value>
@@ -1842,9 +1842,6 @@ Want to publish a different package?</value>
   <data name="PublishPackageViewPackageVersion" xml:space="preserve">
     <value>Version (major minor build)</value>
   </data>
-  <data name="DynamoViewSettingsMenuIsolationMode" xml:space="preserve">
-    <value>Isolate Selected Geometry</value>
-  </data>
   <data name="PublishPackageViewPackageVersionTooltip" xml:space="preserve">
     <value>A version name helps a submitter keep track of updates to the package.  A new version of a package will be REJECTED if this is not incremeneted.</value>
   </data>
@@ -2185,5 +2182,8 @@ Do you want to install the latest Dynamo update?</value>
   </data>
   <data name="RerunButtonToolTip" xml:space="preserve">
     <value>Rerun the graph.</value>
+  </data>
+  <data name="PackagePathPythonHeading" xml:space="preserve">
+    <value>Python template file path:</value>
   </data>
 </root>
