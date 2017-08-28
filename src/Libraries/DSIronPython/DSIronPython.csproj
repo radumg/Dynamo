@@ -36,6 +36,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DynamoCore, Version=2.0.0.6050, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\bin\AnyCPU\Debug\DynamoCore.dll</HintPath>
+    </Reference>
     <Reference Include="IronPython">
       <HintPath>..\..\..\extern\IronPython\IronPython.dll</HintPath>
     </Reference>
@@ -55,6 +59,7 @@
     <Compile Include="..\..\AssemblySharedInfoGenerator\AssemblySharedInfo.cs">
       <Link>Properties\AssemblySharedInfo.cs</Link>
     </Compile>
+    <Compile Include="DebugWriter.cs" />
     <Compile Include="IronPythonEvaluator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

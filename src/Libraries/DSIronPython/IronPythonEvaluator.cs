@@ -7,7 +7,6 @@ using IronPython.Hosting;
 
 using Microsoft.Scripting.Hosting;
 using System.IO;
-using Dynamo.Models;
 using System.Text;
 
 namespace DSIronPython
@@ -32,15 +31,17 @@ namespace DSIronPython
         private static string prev_code { get; set; }
         /// <summary> stores a copy of the previously compiled engine</summary>
         private static ScriptSource prev_script { get; set; }
+
+        public static DebugWriter debugFS = new DebugWriter(@"C:\Users\radug\Desktop\testing\debugOutputStream.log");
        /// <summary>
-        ///     Executes a Python script with custom variable names. Script may be a string
-        ///     read from a file, for example. Pass a list of names (matching the variable
-        ///     names in the script) to bindingNames and pass a corresponding list of values
-        ///     to bindingValues.
-        /// </summary>
-        /// <param name="code">Python script as a string.</param>
-        /// <param name="bindingNames">Names of values referenced in Python script.</param>
-        /// <param name="bindingValues">Values referenced in Python script.</param>
+       ///     Executes a Python script with custom variable names. Script may be a string
+       ///     read from a file, for example. Pass a list of names (matching the variable
+       ///     names in the script) to bindingNames and pass a corresponding list of values
+       ///     to bindingValues.
+       /// </summary>
+       /// <param name="code">Python script as a string.</param>
+       /// <param name="bindingNames">Names of values referenced in Python script.</param>
+       /// <param name="bindingValues">Values referenced in Python script.</param>
         public static object EvaluateIronPythonScript(
             string code,
             IList bindingNames,
@@ -63,8 +64,7 @@ namespace DSIronPython
 
             engine.Runtime.IO.SetOutput(ms, System.Text.Encoding.UTF8);
             */
-            FileStream fs = new FileStream(@"C:\Users\radug\Desktop\testing\debugOutput.log", System.IO.FileMode.Append);
-            engine.Runtime.IO.SetOutput(DynamoModel.debugFS, Encoding.ASCII);
+            engine.Runtime.IO.SetOutput(debugFS, Encoding.ASCII);
 
             //byte[] array = Encoding.ASCII.GetBytes(message);
 
@@ -91,9 +91,6 @@ namespace DSIronPython
             }
 
             OnEvaluationEnd(true, engine, scope, code, bindingValues);
-
-            fs.Dispose();
-            DynamoModel.debugFS.Flush();
 
             var result = scope.ContainsVariable("OUT") ? scope.GetVariable("OUT") : null;
             return OutputMarshaler.Marshal(result);
