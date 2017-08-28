@@ -6,6 +6,9 @@ using Dynamo.Utilities;
 using IronPython.Hosting;
 
 using Microsoft.Scripting.Hosting;
+using System.IO;
+using Dynamo.Models;
+using System.Text;
 
 namespace DSIronPython
 {
@@ -29,8 +32,7 @@ namespace DSIronPython
         private static string prev_code { get; set; }
         /// <summary> stores a copy of the previously compiled engine</summary>
         private static ScriptSource prev_script { get; set; }
-
-        /// <summary>
+       /// <summary>
         ///     Executes a Python script with custom variable names. Script may be a string
         ///     read from a file, for example. Pass a list of names (matching the variable
         ///     names in the script) to bindingNames and pass a corresponding list of values
@@ -54,6 +56,19 @@ namespace DSIronPython
 
             ScriptEngine engine = prev_script.Engine;
             ScriptScope scope = engine.CreateScope();
+            /*
+            MemoryStream ms = new MemoryStream();
+            var outputWr = new EventRaisingStreamWriter(ms);
+            outputWr.StringWritten += new EventHandler<MyEvtArgs<string>>(sWr_StringWritten);
+
+            engine.Runtime.IO.SetOutput(ms, System.Text.Encoding.UTF8);
+            */
+            FileStream fs = new FileStream(@"C:\Users\radug\Desktop\testing\debugOutput.log", System.IO.FileMode.Append);
+            engine.Runtime.IO.SetOutput(DynamoModel.debugFS, Encoding.ASCII);
+
+            //byte[] array = Encoding.ASCII.GetBytes(message);
+
+            //DynamoModel.debugFS.Write(array, 0, array.Length);
 
             int amt = Math.Min(bindingNames.Count, bindingValues.Count);
 
@@ -77,8 +92,10 @@ namespace DSIronPython
 
             OnEvaluationEnd(true, engine, scope, code, bindingValues);
 
-            var result = scope.ContainsVariable("OUT") ? scope.GetVariable("OUT") : null;
+            fs.Dispose();
+            DynamoModel.debugFS.Flush();
 
+            var result = scope.ContainsVariable("OUT") ? scope.GetVariable("OUT") : null;
             return OutputMarshaler.Marshal(result);
         }
 
@@ -179,5 +196,63 @@ namespace DSIronPython
 
         #endregion
 
+        static void sWr_StringWritten(object sender, MyEvtArgs<string> e)
+        {
+            var fullpath = @"C:\Users\radug\Desktop\testing\debug.log";
+            var message = " ------------------> Event was raised at : " + DateTime.Now.ToString() + Environment.NewLine;
+            System.IO.File.AppendAllText(fullpath, message);
+        }
     }
+
+    // DEBUG EVENT ARGS
+    public class MyEvtArgs<T> : EventArgs
+    {
+        public T Value
+        {
+            get;
+            private set;
+        }
+        public MyEvtArgs(T value)
+        {
+            this.Value = value;
+        }
+    }
+
+    // DEBUG EVENT
+    public class EventRaisingStreamWriter : StreamWriter
+    {
+        // Event
+        public event EventHandler<MyEvtArgs<string>> StringWritten;
+
+        // CTOR
+        public EventRaisingStreamWriter(Stream s) : base(s)
+        { }
+
+        // Private Methods
+        private void LaunchEvent(string txtWritten)
+        {
+            if (StringWritten != null)
+            {
+                StringWritten(this, new MyEvtArgs<string>(txtWritten));
+                var fullpath = @"C:\Users\radug\Desktop\testing\debugEvents.log";
+                var message = "Event triggered at : " + DateTime.Now.ToString() + Environment.NewLine;
+                System.IO.File.AppendAllText(fullpath, message);
+
+            }
+        }
+
+        // Overrides
+        public override void Write(string value)
+        {
+            base.Write(value);
+            LaunchEvent(value);
+        }
+        public override void Write(bool value)
+        {
+            base.Write(value);
+            LaunchEvent(value.ToString());
+        }
+        // here override all writing methods...
+    }
+
 }

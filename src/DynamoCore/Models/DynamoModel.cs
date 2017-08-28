@@ -66,6 +66,8 @@ namespace Dynamo.Models
     /// </summary>
     public partial class DynamoModel : IDynamoModel, IDisposable, IEngineControllerManager, ITraceReconciliationProcessor
     {
+        public static FileStream debugFS = new FileStream(@"C:\Users\radug\Desktop\testing\debugOutputGlobal.log", System.IO.FileMode.Append);
+
         #region private members
 
         private readonly string geometryFactoryPath;
