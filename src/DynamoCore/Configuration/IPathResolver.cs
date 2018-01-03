@@ -164,6 +164,11 @@ namespace Dynamo.Interfaces
         string PythonTemplateFilePath { get; }
 
         /// <summary>
+        /// Full path to the folder holding .py and .dyn template files.
+        /// </summary>
+        string TemplatesDirectory { get; }
+
+        /// <summary>
         /// Full path to the GalleryContent xml file. The file is located in
         /// the AppData/Dynamo/[version]/gallery/
         /// </summary>

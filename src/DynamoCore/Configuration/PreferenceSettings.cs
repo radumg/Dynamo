@@ -264,6 +264,18 @@ namespace Dynamo.Configuration
         /// </summary>
         private static string pythonTemplateFilePath = "";
 
+        private static string templatesDirectory = "";
+
+        /// <summary>
+        /// Path to the templates folder containing .py and .dyn template files.
+        /// </summary>
+        public string TemplatesDirectory
+        {
+            get { return templatesDirectory; }
+            set { templatesDirectory = value; }
+        }
+
+
         /// <summary>
         /// This defines how long (in milliseconds) will the graph be automatically saved.
         /// </summary>
@@ -337,6 +349,7 @@ namespace Dynamo.Configuration
 
             CustomPackageFolders = new List<string>();
             PythonTemplateFilePath = "";
+            TemplatesDirectory = "";
         }
 
         /// <summary>
@@ -423,6 +436,15 @@ namespace Dynamo.Configuration
         public static string GetPythonTemplateFilePath()
         {
             return pythonTemplateFilePath;
+        }
+
+        /// <summary>
+        /// Returns the path to the Templates folder.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetTemplatesDirectory()
+        {
+            return templatesDirectory;
         }
 
         internal void InitializeNamespacesToExcludeFromLibrary()

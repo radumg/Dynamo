@@ -61,6 +61,7 @@ namespace Dynamo.Core
         public const string SamplesDirectoryName = "samples";
         public const string GalleryDirectoryName = "gallery";
         public const string BackupDirectoryName = "backup";
+        public const string TemplatesDirectoryName = "templates";
         public const string PreferenceSettingsFileName = "DynamoSettings.xml";
         public const string PythonTemplateFileName = "PythonTemplate.py";
         public const string GalleryContentsFileName = "GalleryContents.xml";
@@ -76,6 +77,7 @@ namespace Dynamo.Core
         private readonly string logDirectory;
         private readonly string samplesDirectory;
         private readonly string backupDirectory;
+        private readonly string templatesDirectory;
         private readonly string preferenceFilePath;
         private readonly string galleryFilePath;
         private string pythonTemplateFilePath;
@@ -166,6 +168,11 @@ namespace Dynamo.Core
         public string BackupDirectory
         {
             get { return backupDirectory; }
+        }
+
+        public string TemplatesDirectory
+        {
+            get { return templatesDirectory; }
         }
 
         public string PreferenceFilePath
@@ -340,6 +347,7 @@ namespace Dynamo.Core
             preferenceFilePath = Path.Combine(userDataDir, PreferenceSettingsFileName);
             pythonTemplateFilePath = Path.Combine(userDataDir, PythonTemplateFileName);
             backupDirectory = Path.Combine(userDataDirNoVersion, BackupDirectoryName);
+            templatesDirectory = Path.Combine(userDataDir, TemplatesDirectoryName);
 
             // Common directories.
             commonDataDir = GetCommonDataFolder(pathResolver);
@@ -387,6 +395,7 @@ namespace Dynamo.Core
             exceptions.Add(PathHelper.CreateFolderIfNotExist(logDirectory));
             exceptions.Add(PathHelper.CreateFolderIfNotExist(DefaultPackagesDirectory));
             exceptions.Add(PathHelper.CreateFolderIfNotExist(backupDirectory));
+            exceptions.Add(PathHelper.CreateFolderIfNotExist(templatesDirectory));
 
             // Common data folders for all users.
             exceptions.Add(PathHelper.CreateFolderIfNotExist(commonDataDir));

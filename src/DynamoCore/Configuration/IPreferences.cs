@@ -165,6 +165,10 @@ namespace Dynamo.Interfaces
         /// </summary>
         string PythonTemplateFilePath { get; set; }
 
+        /// <summary>
+        /// Returns the full path to the configured templates folder, containing *.py and *.dyn templates.
+        /// </summary>
+        string TemplatesDirectory { get; set; }
     }
 
     /// <summary>
