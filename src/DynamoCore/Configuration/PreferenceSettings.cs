@@ -446,6 +446,25 @@ namespace Dynamo.Configuration
             return templatesDirectory;
         }
 
+        /// <summary>
+        /// Returns all .dyn files present in the templates directory.
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> GetDynTemplates()
+        {
+            if (!Directory.Exists(templatesDirectory)) throw new Exception("templates directory does not exist.");
+
+            return Directory.GetFiles(templatesDirectory,"*.DYN", SearchOption.TopDirectoryOnly).ToList();
+        }
+
+        public static List<string> GetPyTemplates()
+        {
+            if (!Directory.Exists(templatesDirectory)) throw new Exception("templates directory does not exist.");
+
+            return Directory.GetFiles(templatesDirectory, "*.PY", SearchOption.TopDirectoryOnly).ToList();
+        }
+
+
         internal void InitializeNamespacesToExcludeFromLibrary()
         {
             if (!NamespacesToExcludeFromLibrarySpecified)

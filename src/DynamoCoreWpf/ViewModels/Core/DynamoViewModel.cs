@@ -41,7 +41,7 @@ namespace Dynamo.ViewModels
 {
     public interface IDynamoViewModel : INotifyPropertyChanged
     {
-        ObservableCollection<WorkspaceViewModel> Workspaces { get; set; } 
+        ObservableCollection<WorkspaceViewModel> Workspaces { get; set; }
     }
 
     public partial class DynamoViewModel : ViewModelBase, IDynamoViewModel
@@ -65,7 +65,7 @@ namespace Dynamo.ViewModels
         private readonly DynamoModel model;
         private Point transformOrigin;
         private bool showStartPage = false;
-        
+
         private List<DefaultWatch3DViewModel> watch3DViewModels = new List<DefaultWatch3DViewModel>();
 
         /// <summary>
@@ -397,7 +397,7 @@ namespace Dynamo.ViewModels
             {
                 model.DebugSettings.VerboseLogging = value;
                 RaisePropertyChanged("VerboseLogging");
-           }
+            }
         }
 
         public bool ShowDebugASTs
@@ -433,7 +433,7 @@ namespace Dynamo.ViewModels
             {
                 showRunPreview = value;
                 HomeSpace.GetExecutingNodes(showRunPreview);
-                RaisePropertyChanged("ShowRunPreview");              
+                RaisePropertyChanged("ShowRunPreview");
             }
         }
 
@@ -441,7 +441,7 @@ namespace Dynamo.ViewModels
 
         public bool EnablePresetOptions
         {
-            get { return this.Model.CurrentWorkspace.Presets.Any(); }            
+            get { return this.Model.CurrentWorkspace.Presets.Any(); }
         }
 
         /// <summary>
@@ -467,7 +467,7 @@ namespace Dynamo.ViewModels
         {
             get { return BackgroundPreviewViewModel.Active; }
         }
-        
+
         #endregion
 
         public struct StartConfiguration
@@ -487,18 +487,18 @@ namespace Dynamo.ViewModels
 
         public static DynamoViewModel Start(StartConfiguration startConfiguration = new StartConfiguration())
         {
-            if(startConfiguration.DynamoModel == null) 
+            if (startConfiguration.DynamoModel == null)
                 startConfiguration.DynamoModel = DynamoModel.Start();
 
-            if(startConfiguration.WatchHandler == null)
+            if (startConfiguration.WatchHandler == null)
                 startConfiguration.WatchHandler = new DefaultWatchHandler(startConfiguration.DynamoModel.PreferenceSettings);
 
             if (startConfiguration.Watch3DViewModel == null)
             {
-                startConfiguration.Watch3DViewModel = 
+                startConfiguration.Watch3DViewModel =
                     HelixWatch3DViewModel.TryCreateHelixWatch3DViewModel(
                         null,
-                        new Watch3DViewModelStartupParams(startConfiguration.DynamoModel), 
+                        new Watch3DViewModelStartupParams(startConfiguration.DynamoModel),
                         startConfiguration.DynamoModel.Logger);
             }
 
@@ -533,10 +533,10 @@ namespace Dynamo.ViewModels
             var homespaceViewModel = new HomeWorkspaceViewModel(model.CurrentWorkspace as HomeWorkspaceModel, this);
             workspaces.Add(homespaceViewModel);
             currentWorkspaceViewModel = homespaceViewModel;
-           
+
             model.WorkspaceAdded += WorkspaceAdded;
             model.WorkspaceRemoved += WorkspaceRemoved;
-             
+
             SubscribeModelCleaningUpEvent();
             SubscribeModelUiEvents();
             SubscribeModelChangedHandlers();
@@ -605,7 +605,7 @@ namespace Dynamo.ViewModels
             switch (e.PropertyName)
             {
                 case "Active":
-                    RaisePropertyChanged("BackgroundPreviewActive");                 
+                    RaisePropertyChanged("BackgroundPreviewActive");
                     break;
                 case "CanNavigateBackground":
                     if (!BackgroundPreviewViewModel.CanNavigateBackground)
@@ -950,7 +950,7 @@ namespace Dynamo.ViewModels
 
             return true;
         }
-       
+
         private void Paste(object parameter)
         {
             OnRequestPaste();
@@ -1038,7 +1038,7 @@ namespace Dynamo.ViewModels
             {
                 var command = new DynamoModel.DeleteModelCommand(group.GUID);
                 this.ExecuteCommand(command);
-            }            
+            }
         }
 
         internal bool CanUngroupAnnotation(object parameter)
@@ -1061,7 +1061,7 @@ namespace Dynamo.ViewModels
                     var command = new DynamoModel.UngroupModelCommand(modelb.GUID);
                     this.ExecuteCommand(command);
                 }
-            }  
+            }
         }
 
         internal bool CanUngroupModel(object parameter)
@@ -1071,7 +1071,7 @@ namespace Dynamo.ViewModels
         }
 
         internal bool CanAddModelsToGroup(object obj)
-        {          
+        {
             return DynamoSelection.Instance.Selection.OfType<AnnotationModel>().Any();
         }
 
@@ -1090,7 +1090,7 @@ namespace Dynamo.ViewModels
                     var command = new DynamoModel.AddModelToGroupCommand(modelb.GUID);
                     this.ExecuteCommand(command);
                 }
-            }  
+            }
         }
 
         private void WorkspaceAdded(WorkspaceModel item)
@@ -1127,11 +1127,11 @@ namespace Dynamo.ViewModels
         {
             var viewModel = workspaces.First(x => x.Model == item);
             if (currentWorkspaceViewModel == viewModel)
-                if(currentWorkspaceViewModel != null)
+                if (currentWorkspaceViewModel != null)
                 {
                     currentWorkspaceViewModel.Dispose();
                 }
-                currentWorkspaceViewModel = null;
+            currentWorkspaceViewModel = null;
             workspaces.Remove(viewModel);
         }
 
@@ -1169,12 +1169,12 @@ namespace Dynamo.ViewModels
             if (workspace == HomeSpace)
             {
                 ext = ".dyn";
-                fltr = string.Format(Resources.FileDialogDynamoWorkspace,BrandingResourceProvider.ProductName,"*.dyn");
+                fltr = string.Format(Resources.FileDialogDynamoWorkspace, BrandingResourceProvider.ProductName, "*.dyn");
             }
             else
             {
                 ext = ".dyf";
-                fltr = string.Format(Resources.FileDialogDynamoCustomNode,BrandingResourceProvider.ProductName,"*.dyf");
+                fltr = string.Format(Resources.FileDialogDynamoCustomNode, BrandingResourceProvider.ProductName, "*.dyf");
             }
             fltr += "|" + string.Format(Resources.FileDialogAllFiles, "*.*");
 
@@ -1199,7 +1199,7 @@ namespace Dynamo.ViewModels
                 return;
             }
 
-            if(HomeSpace != null && HomeSpace.HasUnsavedChanges)
+            if (HomeSpace != null && HomeSpace.HasUnsavedChanges)
             {
                 if (AskUserToSaveWorkspaceOrCancel(HomeSpace))
                 {
@@ -1227,7 +1227,7 @@ namespace Dynamo.ViewModels
             // try catch for exceptions thrown while opening files, say from a future version, 
             // that can't be handled reliably
             filePath = string.Empty;
-            bool forceManualMode = false; 
+            bool forceManualMode = false;
             try
             {
                 var packedParams = parameters as Tuple<string, bool>;
@@ -1320,7 +1320,7 @@ namespace Dynamo.ViewModels
                 Filter = string.Format(Resources.FileDialogDynamoDefinitions,
                          BrandingResourceProvider.ProductName, "*.dyn;*.dyf") + "|" +
                          string.Format(Resources.FileDialogAllFiles, "*.*"),
-                Title = string.Format(Resources.OpenDynamoDefinitionDialogTitle,BrandingResourceProvider.ProductName)
+                Title = string.Format(Resources.OpenDynamoDefinitionDialogTitle, BrandingResourceProvider.ProductName)
             };
 
             // if you've got the current space path, use it as the inital dir
@@ -1352,7 +1352,7 @@ namespace Dynamo.ViewModels
             {
                 if (CanOpen(_fileDialog.FileName))
                 {
-                    Open(new Tuple<string,bool>(_fileDialog.FileName, _fileDialog.RunManualMode));
+                    Open(new Tuple<string, bool>(_fileDialog.FileName, _fileDialog.RunManualMode));
                 }
             }
         }
@@ -1390,9 +1390,9 @@ namespace Dynamo.ViewModels
                 if (this.CurrentSpace.IsReadOnly)
                     ShowSaveDialogAndSaveResult(parameter);
                 else
-                    SaveAs(Model.CurrentWorkspace.FileName);      
+                    SaveAs(Model.CurrentWorkspace.FileName);
             }
-                
+
         }
 
         private bool CanSave(object parameter)
@@ -1434,7 +1434,7 @@ namespace Dynamo.ViewModels
 
                 CurrentSpaceViewModel.Save(path, isBackup, Model.EngineController);
 
-                if(!isBackup) AddToRecentFiles(path);
+                if (!isBackup) AddToRecentFiles(path);
             }
             catch (Exception ex)
             {
@@ -1446,7 +1446,7 @@ namespace Dynamo.ViewModels
             }
         }
 
-        
+
         /// <summary>
         ///     Attempts to save a given workspace.  Shows a save as dialog if the 
         ///     workspace does not already have a path associated with it
@@ -1575,7 +1575,7 @@ namespace Dynamo.ViewModels
         /// </summary>
         /// <param name="parameter"></param>
         private void ShowNewFunctionDialogAndMakeFunction(object parameter)
-        {           
+        {
             var args = new FunctionNamePromptEventArgs();
             this.Model.OnRequestsFunctionNamePrompt(this, args);
 
@@ -1618,11 +1618,11 @@ namespace Dynamo.ViewModels
                 {
                     this.ExecuteCommand(new DynamoModel.AddPresetCommand(args.Name, args.Description, ids));
                 }
-                
+
                 //Presets created - this will enable the Restore / Delete presets
-                RaisePropertyChanged("EnablePresetOptions");     
+                RaisePropertyChanged("EnablePresetOptions");
             }
-          
+
         }
         private bool CanShowNewPresetStateDialog(object parameter)
         {
@@ -1808,6 +1808,25 @@ namespace Dynamo.ViewModels
 
         public void MakeNewHomeWorkspace(object parameter)
         {
+            // TODO: (Radu) remove the temporary messagebox junk from below
+            var dyns = PreferenceSettings.GetDynTemplates();
+            var pys = PreferenceSettings.GetPyTemplates();
+
+            var dyntext = "";
+            var pytext = "";
+            dyns.ForEach(x => dyntext += x + Environment.NewLine);
+            pys.ForEach(x => pytext += x + Environment.NewLine);
+
+            var txt = "";
+
+            txt += "Looking for templates here : " + PreferenceSettings.TemplatesDirectory + Environment.NewLine + Environment.NewLine;
+            txt += "There are " + dyns.Count.ToString() + "DYNs and " + pys.Count.ToString() + " PYs" + Environment.NewLine + Environment.NewLine;
+            txt += "Starting a new file, here are the available templates : " + Environment.NewLine + Environment.NewLine +
+                    dyntext + Environment.NewLine + Environment.NewLine;
+            txt += "Python templates are : " + Environment.NewLine +
+                    pytext;
+
+            System.Windows.Forms.MessageBox.Show(txt);
             if (ClearHomeWorkspaceInternal())
                 this.ShowStartPage = false; // Hide start page if there's one.
         }
@@ -2183,7 +2202,7 @@ namespace Dynamo.ViewModels
 
         internal void ZoomIn(object parameter)
         {
-            if (BackgroundPreviewViewModel != null && 
+            if (BackgroundPreviewViewModel != null &&
                 BackgroundPreviewViewModel.CanNavigateBackground)
             {
                 var op = ViewOperationEventArgs.Operation.ZoomIn;
@@ -2202,7 +2221,7 @@ namespace Dynamo.ViewModels
 
         private void ZoomOut(object parameter)
         {
-            if (BackgroundPreviewViewModel != null && 
+            if (BackgroundPreviewViewModel != null &&
                 BackgroundPreviewViewModel.CanNavigateBackground)
             {
                 var op = ViewOperationEventArgs.Operation.ZoomOut;
@@ -2238,7 +2257,7 @@ namespace Dynamo.ViewModels
 
         public void ImportLibrary(object parameter)
         {
-            string[] fileFilter = {string.Format(Resources.FileDialogLibraryFiles, "*.dll; *.ds" ), string.Format(Resources.FileDialogAssemblyFiles, "*.dll"), 
+            string[] fileFilter = {string.Format(Resources.FileDialogLibraryFiles, "*.dll; *.ds" ), string.Format(Resources.FileDialogAssemblyFiles, "*.dll"),
                                    string.Format(Resources.FileDialogDesignScriptFiles, "*.ds"), string.Format(Resources.FileDialogAllFiles,"*.*")};
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = String.Join("|", fileFilter);
@@ -2262,15 +2281,15 @@ namespace Dynamo.ViewModels
                             string shortMessage = Resources.PackagePathAutoAddNotificationShortDescription;
                             string detailedMessage = Resources.PackagePathAutoAddNotificationDetailedDescription;
                             this.Model.Logger.LogNotification(
-                                "Dynamo", 
+                                "Dynamo",
                                 title,
-                                shortMessage, 
+                                shortMessage,
                                 string.Format(detailedMessage, file));
                         }
                     }
                     SearchViewModel.SearchAndUpdateResults();
                 }
-                catch(LibraryLoadFailedException ex)
+                catch (LibraryLoadFailedException ex)
                 {
                     System.Windows.MessageBox.Show(String.Format(ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Warning));
                 }
@@ -2310,7 +2329,7 @@ namespace Dynamo.ViewModels
                 AddExtension = true,
                 DefaultExt = ".stl",
                 FileName = Resources.FileDialogDefaultSTLModelName,
-                Filter = string.Format(Resources.FileDialogSTLModels,"*.stl"),
+                Filter = string.Format(Resources.FileDialogSTLModels, "*.stl"),
                 Title = Resources.SaveModelToSTLDialogTitle,
             };
 
