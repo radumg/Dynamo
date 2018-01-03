@@ -671,4 +671,13 @@ value : bool = false</value>
   <data name="UnresolvedNodesWarningTitle" xml:space="preserve">
     <value>Graph Contains Unresolved Nodes and Cannot Be Saved.</value>
   </data>
+  <data name="TemplatesDirectoryDefaultLocation" xml:space="preserve">
+    <value>Templates directory set to default location.</value>
+  </data>
+  <data name="TemplatesDirectoryInvalid" xml:space="preserve">
+    <value>Specified templates directory does not exist or is invalid.</value>
+  </data>
+  <data name="TemplatesDirectoryUserSpecified" xml:space="preserve">
+    <value>Templates directory has been set to user-specified location</value>
+  </data>
 </root>

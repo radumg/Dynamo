@@ -275,7 +275,6 @@ namespace Dynamo.Configuration
             set { templatesDirectory = value; }
         }
 
-
         /// <summary>
         /// This defines how long (in milliseconds) will the graph be automatically saved.
         /// </summary>
